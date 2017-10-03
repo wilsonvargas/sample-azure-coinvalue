@@ -26,6 +26,9 @@ namespace CoinClient
 		
 		public static void UpdateIdValues()
 		{
+			global::Microsoft.Azure.Mobile.Push.Android.Resource.Integer.google_play_services_version = global::CoinClient.Resource.Integer.google_play_services_version;
+			global::Microsoft.Azure.Mobile.Push.Android.Resource.String.common_google_play_services_unknown_issue = global::CoinClient.Resource.String.common_google_play_services_unknown_issue;
+			global::Microsoft.Azure.Mobile.Push.Android.Resource.String.library_name = global::CoinClient.Resource.String.library_name;
 		}
 		
 		public partial class Attribute
@@ -37,6 +40,28 @@ namespace CoinClient
 			}
 			
 			private Attribute()
+			{
+			}
+		}
+		
+		public partial class Color
+		{
+			
+			// aapt resource value: 0x7f060001
+			public const int black = 2131099649;
+			
+			// aapt resource value: 0x7f060002
+			public const int msblue = 2131099650;
+			
+			// aapt resource value: 0x7f060000
+			public const int white = 2131099648;
+			
+			static Color()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Color()
 			{
 			}
 		}
@@ -53,6 +78,12 @@ namespace CoinClient
 			// aapt resource value: 0x7f020002
 			public const int ArrowUp = 2130837506;
 			
+			// aapt resource value: 0x7f020003
+			public const int Icon = 2130837507;
+			
+			// aapt resource value: 0x7f020004
+			public const int MSLogoSmall = 2130837508;
+			
 			static Drawable()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
@@ -66,14 +97,20 @@ namespace CoinClient
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f050000
-			public const int ArrowImage = 2131034112;
+			// aapt resource value: 0x7f070000
+			public const int ArrowImage = 2131165184;
 			
-			// aapt resource value: 0x7f050001
-			public const int RefreshButton = 2131034113;
+			// aapt resource value: 0x7f070002
+			public const int BottomPanel = 2131165186;
 			
-			// aapt resource value: 0x7f050002
-			public const int ValueLabel = 2131034114;
+			// aapt resource value: 0x7f070003
+			public const int RefreshButton = 2131165187;
+			
+			// aapt resource value: 0x7f070001
+			public const int ValueLabel = 2131165185;
+			
+			// aapt resource value: 0x7f070004
+			public const int imageView2 = 2131165188;
 			
 			static Id()
 			{
@@ -81,6 +118,22 @@ namespace CoinClient
 			}
 			
 			private Id()
+			{
+			}
+		}
+		
+		public partial class Integer
+		{
+			
+			// aapt resource value: 0x7f040000
+			public const int google_play_services_version = 2130968576;
+			
+			static Integer()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Integer()
 			{
 			}
 		}
@@ -104,8 +157,35 @@ namespace CoinClient
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f040000
-			public const int app_name = 2130968576;
+			// aapt resource value: 0x7f050009
+			public const int app_name = 2131034121;
+			
+			// aapt resource value: 0x7f050000
+			public const int common_google_play_services_unknown_issue = 2131034112;
+			
+			// aapt resource value: 0x7f050004
+			public const int default_web_client_id = 2131034116;
+			
+			// aapt resource value: 0x7f050005
+			public const int firebase_database_url = 2131034117;
+			
+			// aapt resource value: 0x7f050002
+			public const int gcm_defaultSenderId = 2131034114;
+			
+			// aapt resource value: 0x7f050006
+			public const int google_api_key = 2131034118;
+			
+			// aapt resource value: 0x7f050003
+			public const int google_app_id = 2131034115;
+			
+			// aapt resource value: 0x7f050007
+			public const int google_crash_reporting_api_key = 2131034119;
+			
+			// aapt resource value: 0x7f050008
+			public const int google_storage_bucket = 2131034120;
+			
+			// aapt resource value: 0x7f050001
+			public const int library_name = 2131034113;
 			
 			static String()
 			{
