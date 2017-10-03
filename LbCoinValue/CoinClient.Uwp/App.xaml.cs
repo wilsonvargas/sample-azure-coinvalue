@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Azure.Mobile;
+using Microsoft.Azure.Mobile.Push;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -71,6 +73,34 @@ namespace CoinClient.Uwp
                 // Ensure the current window is active
                 Window.Current.Activate();
             }
+
+            // This should come before MobileCenter.Start() is called
+            Push.PushNotificationReceived += HandlePushNotificationReceived;
+
+            MobileCenter.Start("563abf85-5e41-4ff3-a352-1d08c2191b2a", typeof(Push));
+            Push.CheckLaunchedFromNotification(e);
+        }
+
+        private void HandlePushNotificationReceived(object sender, PushNotificationReceivedEventArgs e)
+        {
+            // Add the notification message and title to the message
+            var summary = $"Push notification received:" +
+                                $"\n\tNotification title: {e.Title}" +
+                                $"\n\tMessage: {e.Message}";
+
+            // If there is custom data associated with the notification,
+            // print the entries
+            if (e.CustomData != null)
+            {
+                summary += "\n\tCustom data:\n";
+                foreach (var key in e.CustomData.Keys)
+                {
+                    summary += $"\t\t{key} : {e.CustomData[key]}\n";
+                }
+            }
+
+            // Send the notification summary to debug output
+            System.Diagnostics.Debug.WriteLine(summary);
         }
 
         /// <summary>
