@@ -8,6 +8,9 @@ using Microsoft.Azure.Mobile.Analytics;
 using Microsoft.Azure.Mobile.Crashes;
 using Microsoft.Azure.Mobile.Push;
 using System;
+using Android.Content;
+using Android.Support.V4.App;
+using Android.Media;
 
 namespace CoinClient
 {
@@ -30,8 +33,6 @@ namespace CoinClient
             // Set the Azure Mobile Center up
             MobileCenter.Start(
                 "b02bf21a-e359-4e48-9442-394952ea67b2", 
-                typeof(Analytics), 
-                typeof(Crashes),
                 typeof(Push));
 
             _bindings.Add(this.SetBinding(
@@ -73,24 +74,25 @@ namespace CoinClient
 
         private void HandlePushNotificationReceived(object sender, PushNotificationReceivedEventArgs e)
         {
-            // Add the notification message and title to the message
-            var summary = $"Push notification received:" +
-                                $"\n\tNotification title: {e.Title}" +
-                                $"\n\tMessage: {e.Message}";
+            ShowLocalNotification(e.Message, e.Title);
+        }
 
-            // If there is custom data associated with the notification,
-            // print the entries
-            if (e.CustomData != null)
-            {
-                summary += "\n\tCustom data:\n";
-                foreach (var key in e.CustomData.Keys)
-                {
-                    summary += $"\t\t{key} : {e.CustomData[key]}\n";
-                }
-            }
+        public void ShowLocalNotification(string message, string title = "CoinValue")
+        {
+            var notificationManager = (NotificationManager)GetSystemService(NotificationService);
+            var uiIntent = new Intent(this, typeof(MainActivity));
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
 
-            // Send the notification summary to debug output
-            System.Diagnostics.Debug.WriteLine(summary);
+            var notification = builder.SetContentIntent(PendingIntent.GetActivity(this, 0, uiIntent, 0))
+                .SetSmallIcon(Resource.Drawable.NotificationIcon)
+                .SetTicker("CoinValue")
+                .SetContentTitle(title)
+                .SetContentText(message)
+                .SetSound(RingtoneManager.GetDefaultUri(RingtoneType.Notification))
+                .SetAutoCancel(true)
+                .Build();
+
+            notificationManager.Notify(1, notification);
         }
     }
 }

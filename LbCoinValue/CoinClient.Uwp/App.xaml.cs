@@ -1,20 +1,13 @@
 ﻿using Microsoft.Azure.Mobile;
 using Microsoft.Azure.Mobile.Push;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
+using System.Xml.Linq;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+using Windows.Data.Xml.Dom;
+using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 namespace CoinClient.Uwp
@@ -83,24 +76,7 @@ namespace CoinClient.Uwp
 
         private void HandlePushNotificationReceived(object sender, PushNotificationReceivedEventArgs e)
         {
-            // Add the notification message and title to the message
-            var summary = $"Push notification received:" +
-                                $"\n\tNotification title: {e.Title}" +
-                                $"\n\tMessage: {e.Message}";
-
-            // If there is custom data associated with the notification,
-            // print the entries
-            if (e.CustomData != null)
-            {
-                summary += "\n\tCustom data:\n";
-                foreach (var key in e.CustomData.Keys)
-                {
-                    summary += $"\t\t{key} : {e.CustomData[key]}\n";
-                }
-            }
-
-            // Send the notification summary to debug output
-            System.Diagnostics.Debug.WriteLine(summary);
+            ShowLocalNotification(e.Title, e.Message);
         }
 
         /// <summary>
@@ -125,6 +101,28 @@ namespace CoinClient.Uwp
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
             deferral.Complete();
+        }
+
+        public static void ShowLocalNotification(string title, string message)
+        {
+            var doc = CreateToast(title, message);
+            var toast = new ToastNotification(doc);
+            var notifier = ToastNotificationManager.CreateToastNotifier();
+            notifier.Show(toast);  
+        }
+
+        private static XmlDocument CreateToast(string title, string message)
+        {
+            var xDoc = new XDocument(
+            new XElement("toast",
+            new XElement("visual",
+            new XElement("binding", new XAttribute("template", "ToastGeneric"),
+            new XElement("text", title),
+            new XElement("text", message)))));
+
+            var xmlDoc = new XmlDocument();
+            xmlDoc.LoadXml(xDoc.ToString());
+            return xmlDoc;
         }
     }
 }
