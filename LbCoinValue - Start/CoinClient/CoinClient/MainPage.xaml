@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:CoinClient"             
+             xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             xmlns:charts="clr-namespace:Microcharts;assembly=Microcharts"
+             x:Class="CoinClient.MainPage"
+             Title="Coin Value"
+             BackgroundColor="LightCoral"
+             Padding="20">
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="150"/>
+        </Grid.RowDefinitions>
+
+        <Image Source="ArrowFlat.png" IsVisible="{Binding IsFlat}"/>
+        <Image Source="ArrowDown.png" IsVisible="{Binding IsDown}"/>
+        <Image Source="ArrowUp.png" IsVisible="{Binding IsUp}"/>
+        <Label Grid.Row="1"
+            HorizontalOptions="Center"
+            FontSize="30"
+            TextColor="Black"
+            Text="{Binding CurrentCoinValue, StringFormat='Value: {0:N4}'}"/>
+
+        <Label Grid.Row="2"
+               Text="{Binding ErrorMessage}"/>
+
+        <ListView Grid.Row="3" 
+                  BackgroundColor="LightCoral"
+                  ItemsSource="{Binding CoinTrends}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell
+                        Text="{Binding CurrentValue, StringFormat='Value: {0:N4}'}"
+                        TextColor="White"
+                        Detail="{Binding TimeDisplay}"
+                        DetailColor="Black"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <microcharts:ChartView IsVisible="True" Grid.Row="4" 
+                               Margin="-20,0,-20,-20"
+                               x:Name="chartView">
+            <microcharts:ChartView.Chart>
+                <charts:LineChart x:Name="chart" PointMode="Square"/>
+            </microcharts:ChartView.Chart>
+        </microcharts:ChartView>
+
+
+
+    </Grid>
+    
+</ContentPage>

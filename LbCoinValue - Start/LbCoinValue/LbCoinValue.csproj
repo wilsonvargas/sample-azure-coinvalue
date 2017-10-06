@@ -6,7 +6,7 @@
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="1.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CoinClient.Data\CoinClient.Data.csproj" />
+    <ProjectReference Include="..\CoinClient.Data\CoinClient.Models.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />

@@ -1,4 +1,4 @@
-﻿namespace CoinClient.Model
+﻿namespace CoinClient
 {
     public class CoinTrend
     {
