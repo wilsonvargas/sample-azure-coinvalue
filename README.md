@@ -1,5 +1,7 @@
 # Xamarin and Azure Function Sample: Coin Value
 
+Build Status: [![Build status](https://ci.appveyor.com/api/projects/status/37567yp4tev3dl6i?svg=true)](https://ci.appveyor.com/project/wilsonvargas/sample-azure-coinvalue)
+
 This sample shows two Azure Functions:
 
 - A **Timer Triggered** function used to save bitcoin value every hour to an Azure Table
